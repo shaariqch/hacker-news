@@ -1,7 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getTopNews } from "../utils/api";
 
-export default function Top(props) {
-  return <h1>Story</h1>;
+export default function Story({
+  author,
+  comments,
+  link,
+  score,
+  timestamp,
+  title
+}) {
+  const date = new Date(timestamp * 1000).toDateString();
+  const numberOfComments = comments !== undefined ? comments.length : 0;
+  return (
+    <div>
+      <h3>{title}</h3>
+      <span>{`by ${author} `}</span>
+      <span>{` on ${date} `}</span>
+      <span>{`with ${numberOfComments} comments`}</span>
+    </div>
+  );
 }
