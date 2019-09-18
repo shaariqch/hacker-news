@@ -16,7 +16,6 @@ export default class Top extends React.Component {
 
   async componentDidMount() {
     const topNews = await getTopNews();
-    console.log(topNews);
     this.setState({
       isLoaded: true,
       topNews: topNews
@@ -28,18 +27,22 @@ export default class Top extends React.Component {
     return (
       <React.Fragment>
         {!isLoaded && <h1>Loading</h1>}
-        {isLoaded &&
-          topNews.map(news => (
-            <Story
-              key={news.id}
-              author={news.by}
-              score={news.score}
-              timestamp={news.time}
-              title={news.title}
-              link={news.url}
-              comments={news.kids}
-            />
-          ))}
+        {isLoaded && (
+          <ul>
+            {topNews.map(news => (
+              <Story
+                key={news.id}
+                author={news.by}
+                score={news.score}
+                timestamp={news.time}
+                title={news.title}
+                link={news.url}
+                comments={news.kids}
+                descendants={news.descendants}
+              />
+            ))}
+          </ul>
+        )}
       </React.Fragment>
     );
   }
