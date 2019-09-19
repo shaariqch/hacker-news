@@ -23,7 +23,7 @@ li {
 }
 
 .story {
-  margin: 20px;
+  margin: 20px 0;
 }
 
 .title-light {
@@ -31,4 +31,27 @@ li {
   text-decoration: none;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.user-meta-light {
+  color: gray;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.story-meta-light {
+  color: gray;
+}
+
+.story-meta-light a,
+.story-meta-light a:visited,
+.story-meta-light a:hover,
+.story-meta-light a:active {
+  color: black;
+}
+
+ul {
+  padding: 0;
 }

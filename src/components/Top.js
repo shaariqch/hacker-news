@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { getTopNews } from "../utils/api";
+import { getTopPosts } from "../utils/api";
 import Story from "./Story";
 
 export default class Top extends React.Component {
@@ -15,7 +15,7 @@ export default class Top extends React.Component {
   }
 
   async componentDidMount() {
-    const topNews = await getTopNews();
+    const topNews = await getTopPosts();
     this.setState({
       isLoaded: true,
       topNews: topNews
@@ -32,7 +32,8 @@ export default class Top extends React.Component {
             {topNews.map(news => (
               <Story
                 key={news.id}
-                author={news.by}
+                post={news.id}
+                username={news.by}
                 score={news.score}
                 timestamp={news.time}
                 title={news.title}
