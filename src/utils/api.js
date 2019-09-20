@@ -1,4 +1,4 @@
-async function getTopPostsIds() {
+export async function getTopPostsIds() {
   const response = await fetch(
     "https://hacker-news.firebaseio.com/v0/topstories.json"
   );
@@ -6,24 +6,31 @@ async function getTopPostsIds() {
   return ids;
 }
 
-export async function getPost(id) {
+export async function getNewPostIds() {
+  const response = await fetch(
+    "https://hacker-news.firebaseio.com/v0/newstories.json"
+  );
+  const ids = await response.json();
+  return ids;
+}
+
+export async function getItem(id) {
   const endpoint = "https://hacker-news.firebaseio.com/v0/item/" + id + ".json";
   const response = await fetch(endpoint);
   const result = await response.json();
   return result;
 }
 
-export async function getTopPosts() {
-  let ids = await getTopPostsIds();
+export async function getPosts(ids) {
   ids = ids.slice(0, 50);
-  let topPostsPromises = [];
+  let postsPromises = [];
 
   ids.map(id => {
-    const news = getPost(id);
-    topPostsPromises.push(news);
+    const news = getItem(id);
+    postsPromises.push(news);
   });
-  const topPosts = await Promise.all(topPostsPromises);
-  return topPosts.filter(news => news.url !== undefined);
+  const posts = await Promise.all(postsPromises);
+  return posts.filter(posts => posts && posts.url !== undefined);
 }
 
 export async function getUserPosts(id) {
@@ -39,7 +46,7 @@ export async function getUserPosts(id) {
 
   let userPostsPromises = [];
   posts.map(postId => {
-    const news = getPost(postId);
+    const news = getItem(postId);
     userPostsPromises.push(news);
   });
   const userPosts = await Promise.all(userPostsPromises);
@@ -52,4 +59,14 @@ export async function getUserPosts(id) {
       post => post.title !== undefined && post.url !== undefined
     )
   };
+}
+
+export async function getComments(commentIds) {
+  let commentsPromises = [];
+  commentIds.map(commentId => {
+    const commentPromise = getItem(commentId);
+    commentsPromises.push(commentPromise);
+  });
+  const comments = await Promise.all(commentsPromises);
+  return comments;
 }

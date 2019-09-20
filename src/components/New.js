@@ -1,26 +1,25 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { getPosts, getTopPostsIds } from "../utils/api";
+import { getPosts, getNewPostIds } from "../utils/api";
 import Story from "./Story";
 
-export default class Top extends React.Component {
+export default class New extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       error: null,
       isLoaded: false,
-      topPosts: null
+      newPosts: null
     };
     this.getTitleLink = this.getTitleLink.bind(this);
   }
 
   async componentDidMount() {
-    const topPostIds = await getTopPostsIds();
-    const topPosts = await getPosts(topPostIds);
+    const newPostIds = await getNewPostIds();
+    const newPosts = await getPosts(newPostIds);
     this.setState({
       isLoaded: true,
-      topPosts: topPosts
+      newPosts: newPosts
     });
   }
 
@@ -33,13 +32,13 @@ export default class Top extends React.Component {
   }
 
   render() {
-    const { topPosts, isLoaded } = this.state;
+    const { newPosts, isLoaded } = this.state;
     return (
       <React.Fragment>
         {!isLoaded && <h1>Loading</h1>}
         {isLoaded && (
           <ul>
-            {topPosts.map(post => (
+            {newPosts.map(post => (
               <li className="story" key={post.id}>
                 <Story
                   postId={post.id}
