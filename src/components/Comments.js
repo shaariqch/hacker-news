@@ -4,6 +4,8 @@ import queryString from "query-string";
 import { getItem, getComments } from "../utils/api";
 import Story from "./Story";
 import UserMeta from "../components/UserMeta";
+import { ThemeConsumer } from "../contexts/theme";
+import Title from "./Title";
 export default class Comments extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,6 @@ export default class Comments extends React.Component {
       comments: null,
       commentsLoaded: false
     };
-    this.getTitleLink = this.getTitleLink.bind(this);
   }
 
   async componentDidMount() {
@@ -25,21 +26,10 @@ export default class Comments extends React.Component {
       postLoaded: true
     });
     const comments = await getComments(post.kids);
-    console.log(comments);
     this.setState({
       comments: comments,
       commentsLoaded: true
     });
-  }
-
-  getTitleLink(title, link) {
-    return (
-      <h1 className=" mb-0">
-        <a className="title-light" href={link}>
-          {title}
-        </a>
-      </h1>
-    );
   }
 
   render() {
@@ -55,11 +45,13 @@ export default class Comments extends React.Component {
               username={post.by}
               score={post.score}
               timestamp={post.time}
-              title={post.title}
-              link={post.url}
               comments={post.kids}
               descendants={post.descendants}
-              titleLink={this.getTitleLink}
+              titleLink={
+                <h1 className=" mb-0">
+                  <Title title={post.title} link={post.url} />
+                </h1>
+              }
             />
             {!commentsLoaded && <h1>Loading comments</h1>}
             {commentsLoaded && (
@@ -87,11 +79,15 @@ function Comment({ username, text, timestamp }) {
     return { __html: text };
   }
   return (
-    <div className="mlr-2">
-      <div className="mb-2">
-        <UserMeta username={username} timestamp={timestamp} />
-      </div>
-      <div dangerouslySetInnerHTML={createCommentMarkup()} />
-    </div>
+    <ThemeConsumer>
+      {({ theme }) => (
+        <div className="mlr-2">
+          <div className="mb-2">
+            <UserMeta username={username} timestamp={timestamp} theme={theme} />
+          </div>
+          <div dangerouslySetInnerHTML={createCommentMarkup()} />
+        </div>
+      )}
+    </ThemeConsumer>
   );
 }

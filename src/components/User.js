@@ -4,6 +4,7 @@ import { getUserPosts } from "../utils/api";
 import queryString from "query-string";
 import { buildDateTimeString } from "../utils/utils";
 import Story from "./Story";
+import Title from "./Title";
 
 export default class User extends React.Component {
   constructor(props) {
@@ -13,7 +14,6 @@ export default class User extends React.Component {
       userPosts: null,
       isLoaded: false
     };
-    this.getTitleLink = this.getTitleLink.bind(this);
   }
 
   async componentDidMount() {
@@ -23,14 +23,6 @@ export default class User extends React.Component {
       userInfo: userInfo,
       isLoaded: true
     });
-  }
-
-  getTitleLink(title, link) {
-    return (
-      <a className="title-light" href={link}>
-        {title}
-      </a>
-    );
   }
 
   render() {
@@ -64,11 +56,9 @@ export default class User extends React.Component {
                       username={post.by}
                       score={post.score}
                       timestamp={post.time}
-                      title={post.title}
-                      link={post.url}
                       comments={post.kids}
                       descendants={post.descendants}
-                      titleLink={this.getTitleLink}
+                      titleLink={(<Title title={post.title} link={post.url}/>)}
                     />
                   </li>
                 ))}

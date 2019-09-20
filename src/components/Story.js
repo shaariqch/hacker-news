@@ -3,29 +3,33 @@ import PropTypes from "prop-types";
 import { buildDateTimeString } from "../utils/utils";
 import { Link } from "react-router-dom";
 import UserMeta from "./UserMeta";
+import { ThemeConsumer } from "../contexts/theme";
 
 export default function Story({
   postId,
   username,
   comments,
-  link,
   score,
   timestamp,
-  title,
   descendants,
   titleLink
 }) {
   descendants = descendants !== undefined ? descendants : 0;
   return (
-    <div>
-      {titleLink(title, link)}
-      <UserMeta
-        username={username}
-        timestamp={timestamp}
-        postId={postId}
-        descendants={descendants}
-      />
-    </div>
+    <ThemeConsumer>
+      {({ theme }) => (
+        <>
+          {titleLink}
+          <UserMeta
+            username={username}
+            timestamp={timestamp}
+            postId={postId}
+            descendants={descendants}
+            theme={theme}
+          />
+        </>
+      )}
+    </ThemeConsumer>
   );
 }
 

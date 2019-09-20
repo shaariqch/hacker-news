@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { getPosts, getTopPostsIds } from "../utils/api";
 import Story from "./Story";
+import Title from "./Title";
 
 export default class Top extends React.Component {
   constructor(props) {
@@ -12,7 +13,6 @@ export default class Top extends React.Component {
       isLoaded: false,
       topPosts: null
     };
-    this.getTitleLink = this.getTitleLink.bind(this);
   }
 
   async componentDidMount() {
@@ -22,14 +22,6 @@ export default class Top extends React.Component {
       isLoaded: true,
       topPosts: topPosts
     });
-  }
-
-  getTitleLink(title, link) {
-    return (
-      <a className="title-light" href={link}>
-        {title}
-      </a>
-    );
   }
 
   render() {
@@ -46,11 +38,9 @@ export default class Top extends React.Component {
                   username={post.by}
                   score={post.score}
                   timestamp={post.time}
-                  title={post.title}
-                  link={post.url}
                   comments={post.kids}
                   descendants={post.descendants}
-                  titleLink={this.getTitleLink}
+                  titleLink={<Title title={post.title} link={post.url} />}
                 />
               </li>
             ))}

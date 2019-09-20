@@ -1,3 +1,11 @@
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -33,6 +41,13 @@ li {
   margin-bottom: 10px;
 }
 
+.title-dark {
+  color: rgb(203, 203, 203);
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
 .user-meta-light {
   color: gray;
 }
@@ -42,7 +57,7 @@ li {
 }
 
 .meta-info-light {
-  color: gray;
+  color: #808080;
 }
 
 .meta-info-light a,
@@ -50,6 +65,17 @@ li {
 .meta-info-light a:hover,
 .meta-info-light a:active {
   color: black;
+}
+
+.meta-info-dark {
+  color: #808080;
+}
+
+.meta-info-dark a,
+.meta-info-dark a:visited,
+.meta-info-dark a:hover,
+.meta-info-dark a:active {
+  color: rgb(203, 203, 203);
 }
 
 ul {
@@ -102,4 +128,20 @@ ul {
 
 .space-between {
   justify-content: space-between;
+}
+
+.btn-clear {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.dark {
+  color: #dadada;
+  background: #1c2022;
+  min-height: 100%;
+}
+
+.dark a {
+  color: #dadada;
 }

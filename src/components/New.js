@@ -1,7 +1,7 @@
 import React from "react";
 import { getPosts, getNewPostIds } from "../utils/api";
 import Story from "./Story";
-
+import Title from "./Title";
 export default class New extends React.Component {
   constructor(props) {
     super(props);
@@ -23,9 +23,9 @@ export default class New extends React.Component {
     });
   }
 
-  getTitleLink(title, link) {
+  getTitleLink(title, link, theme) {
     return (
-      <a className="title-light" href={link}>
+      <a className={`title-${theme}`} href={link}>
         {title}
       </a>
     );
@@ -45,11 +45,9 @@ export default class New extends React.Component {
                   username={post.by}
                   score={post.score}
                   timestamp={post.time}
-                  title={post.title}
-                  link={post.url}
                   comments={post.kids}
                   descendants={post.descendants}
-                  titleLink={this.getTitleLink}
+                  titleLink={<Title title={post.title} link={post.url} />}
                 />
               </li>
             ))}

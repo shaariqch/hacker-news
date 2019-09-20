@@ -3,12 +3,18 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { buildDateTimeString } from "../utils/utils";
 
-export default function UserMeta({ username, timestamp, postId, descendants }) {
+export default function UserMeta({
+  username,
+  timestamp,
+  postId,
+  descendants,
+  theme
+}) {
   const date = new Date(timestamp * 1000);
   const dateTime = buildDateTimeString(date);
   return (
     <React.Fragment>
-      <div className="meta-info-light">
+      <div className={`meta-info-${theme}`}>
         <span>
           by{" "}
           <Link
