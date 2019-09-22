@@ -91,3 +91,9 @@ function Comment({ username, text, timestamp }) {
     </ThemeConsumer>
   );
 }
+
+Comment.propTypes = {
+  username: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired
+};

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { getUserPosts } from "../utils/api";
 import queryString from "query-string";
 import { buildDateTimeString } from "../utils/utils";

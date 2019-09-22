@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { getPosts, getTopPostsIds } from "../utils/api";
 import Story from "./Story";
 import Title from "./Title";
