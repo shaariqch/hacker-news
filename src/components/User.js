@@ -4,7 +4,7 @@ import queryString from "query-string";
 import { buildDateTimeString } from "../utils/utils";
 import Story from "./Story";
 import Title from "./Title";
-
+import Loading from './Loading'
 export default class User extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ export default class User extends React.Component {
     }
     return (
       <React.Fragment>
-        {!isLoaded && <h1>Loading</h1>}
+        {!isLoaded && <Loading />}
 
         {isLoaded && userInfo && (
           <div>

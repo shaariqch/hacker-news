@@ -2,7 +2,7 @@ import React from "react";
 import { getPosts, getTopPostsIds } from "../utils/api";
 import Story from "./Story";
 import Title from "./Title";
-
+import Loading from './Loading'
 export default class Top extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +27,7 @@ export default class Top extends React.Component {
     const { topPosts, isLoaded } = this.state;
     return (
       <React.Fragment>
-        {!isLoaded && <h1>Loading</h1>}
+        {!isLoaded && <Loading />}
         {isLoaded && (
           <ul>
             {topPosts.map(post => (

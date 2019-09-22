@@ -2,6 +2,7 @@ import React from "react";
 import { getPosts, getNewPostIds } from "../utils/api";
 import Story from "./Story";
 import Title from "./Title";
+import Loading from './Loading'
 export default class New extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +36,7 @@ export default class New extends React.Component {
     const { newPosts, isLoaded } = this.state;
     return (
       <React.Fragment>
-        {!isLoaded && <h1>Loading</h1>}
+        {!isLoaded && <Loading />}
         {isLoaded && (
           <ul>
             {newPosts.map(post => (

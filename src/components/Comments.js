@@ -6,6 +6,8 @@ import Story from "./Story";
 import UserMeta from "../components/UserMeta";
 import { ThemeConsumer } from "../contexts/theme";
 import Title from "./Title";
+import Loading from "./Loading";
+
 export default class Comments extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +38,7 @@ export default class Comments extends React.Component {
     const { post, postLoaded, comments, commentsLoaded } = this.state;
     return (
       <React.Fragment>
-        {!postLoaded && <h1>Loading</h1>}
+        {!postLoaded && <Loading />}
         {postLoaded && (
           <React.Fragment>
             <Story
@@ -53,7 +55,7 @@ export default class Comments extends React.Component {
                 </h1>
               }
             />
-            {!commentsLoaded && <h1>Loading comments</h1>}
+            {!commentsLoaded && <Loading text="Loading Comments" />}
             {commentsLoaded && (
               <ul>
                 {comments.map(comment => (
